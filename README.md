@@ -24,4 +24,7 @@ Typical Header:
 https://github.com/Lime-Parallelogram/IR-Code-Referencer  
 https://fishandwhistle.net/post/2016/raspberry-pi-pure-python-infrared-remote-control/  
 https://blog.bschwind.com/2016/05/29/sending-infrared-commands-from-a-raspberry-pi-without-lirc/  
-header & repeat info http://winlirc.sourceforge.net/technicaldetails.html  
+IR frame format info:  
+http://winlirc.sourceforge.net/technicaldetails.html  
+https://techdocs.altium.com/display/FPGA/NEC+Infrared+Transmission+Protocol  
+http://read.pudn.com/downloads157/sourcecode/embed/701593/docs/IR%20Formats%202.PDF  
