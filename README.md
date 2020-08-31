@@ -10,9 +10,11 @@ RPi &amp; IR: Raspberry Pi GPIO &amp; Infrared remote controls (No LIRC)
 - [x] Monitor GPIO pin (no blocking)
 - [x] Capture edges (GPIO callbacks)
 - [x] Decode frame (bin, hex)
-- [ ] Log to file (and lmap buttons)
+- [ ] Data field recovery (redundancy, 8 + 8)
+- [ ] Address field recovery (redundancy, 8 + 8)
+- [ ] Log to config file and map hex codes to buttons
 - [ ] GUI (link code to button and save in config file, confirm/test by button highlighting)
-- [ ] Handle repeate codes, button debouncing, code recovery (redundancy), etc.
+- [ ] Handle repeat codes, button debouncing, etc.
 - [ ] Re-transmit IR codes
 - [ ] Transmit custom IR codes
 
