@@ -64,7 +64,13 @@ Typical Header:
  gap          39597
 
 ``` 
-
+<b> Note </b>: If you had used LIRC, then you had to uncomment a line in ``` /boot/config.txt```  to reserve Rx/Tx GPIO pin. Even after uninstalling LIRC that line still reserves the pin, so you'll need to comment it out again and reboot. After a reboot that pin is available for registering event detection and callback.  
+Rx pin is 11 (Board), i.e. 17 (BCM).  
+``` 
+# Uncomment this to enable infrared communication.
+#dtoverlay=gpio-ir,gpio_pin=17
+#dtoverlay=gpio-ir-tx,gpio_pin=18
+```  
 ### References  
 RPi GPIO, IR:  
 <a href="https://github.com/Lime-Parallelogram/IR-Code-Referencer">Lime-Parallelogram</a> (github with link to youtube)  
