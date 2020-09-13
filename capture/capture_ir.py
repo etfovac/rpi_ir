@@ -4,10 +4,10 @@
 # Date: 30.08.2020.
 # Repo: https://github.com/etfovac/rpi_ir
 # SW: Python 3.7.3
-# HW: Pi Model 3B  V1.2, IR kit:Rx sensor module HX1838, IR Tx = IR remote(s)
+# HW: Pi Model 3B  V1.2, IR kit: Rx sensor module HX1838, Tx = IR remote(s)
 
 import RPi.GPIO as GPIO
-# import multiprocessing
+import threading
 import datetime
 import signal                   
 import sys
@@ -18,8 +18,9 @@ IR_PIN = 11 # Board=11, BCM=17
 cntr = 0
 ts = datetime.datetime.timestamp(datetime.datetime.now())
 ir_signal = []
-ir_decoded = ""
+ir_decoded = []
 ir_data_duration = 0
+button_map = {}
 # Header pulse and gap durations [us]
 header = {'NEC':[9000,4500], 'Yamaha':[9067,4393]}
 # End of message gap duration [us]
@@ -58,6 +59,11 @@ def IR_event_Callback(pin): # IR_PIN is not used, but the callback requires a pa
             #print(ir_decoded)
             if len(ir_decoded) > 0:
                 print(ir_decoded+" bit num: "+str(len(ir_decoded))+" hex: "+str(hex(int(ir_decoded,2)))+" dt="+str(ir_data_duration)+"us")
+                if len(ir_decoded) == 32:
+                    print("Valid IR code! Pressed button was: ")
+                    key = input()
+                    button_map[key] = ir_decoded
+                    print(button_map)
             else:
                 print("IR Rx @ {}: Empty command.".format(IR_PIN))
         else:
