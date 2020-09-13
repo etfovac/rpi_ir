@@ -64,6 +64,41 @@ Typical Header:
  gap          39597
 
 ``` 
+IR format properties are conveniently packed in ```ir_format.py``` which can be updated with more vendor specific details.
+
+### IR Recorder
+Fully working reliable IR recorder is implemented in file ```ir-rec_main.py```: 
+```py
+def ir_rx_callback(ir_decoded, ir_hex, valid):
+        print("ir_decoded={} len={}".format(ir_decoded, len(ir_decoded)))
+        print("ir_dec_hex={}".format(ir_hex))
+        if valid:
+            print("Valid IR code! Pressed button was: ")
+            key = input()
+            button_map[key] = {ir_decoded, ir_hex}
+            print(button_map)
+pi = pigpio.pi()
+ir_rec = infrared.rx(pi, IR_PIN, ir_rx_callback, 5)
+```  
+It relies on 2 imported modules ```pigpio``` and custom ```infrared```.
+Example output:  
+```
+IR Rx @ 17: Setup Started
+IR Rx @ 17: Setup Done (2020-09-13 23:23:58.912651)
+IR Rx @ 17: Waits for IR signal... (Ctrl+C to exit)
+ir_decoded=00000000111111011011000001001111 len=32
+ir_dec_hex=0xfdb04f
+Valid IR code! Pressed button was: 
+0
+{'0': {'0xfdb04f', '00000000111111011011000001001111'}}
+ir_decoded=00000000111111010000000011111111 len=32
+ir_dec_hex=0xfd00ff
+Valid IR code! Pressed button was: 
+1
+{'0': {'0xfdb04f', '00000000111111011011000001001111'}, '1': {'00000000111111010000000011111111', '0xfd00ff'}}
+Interrupt signal 2 on line 43 in /home/pi/Playground/rpi_ir/capture/ir-rec_main.py
+```
+
 <b> Note </b>: If you had used LIRC, then you had to uncomment a line in ``` /boot/config.txt```  to reserve Rx/Tx GPIO pin. Even after uninstalling LIRC that line still reserves the pin, so you'll need to comment it out again and reboot. After a reboot that pin is available for registering event detection and callback.  
 Rx pin is 11 (Board), i.e. 17 (BCM).  
 ``` 
