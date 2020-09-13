@@ -111,6 +111,9 @@ RPi GPIO, IR:
 <a href="https://github.com/Lime-Parallelogram/IR-Code-Referencer">Lime-Parallelogram</a> (github with link to youtube)  
 <a href="https://fishandwhistle.net/post/2016/raspberry-pi-pure-python-infrared-remote-control/">fishandwhistle (2016 blog)</a>  
 <a href="https://blog.bschwind.com/2016/05/29/sending-infrared-commands-from-a-raspberry-pi-without-lirc/">bschwind (2016 blog)</a>  
+RPi pigpi:  
+<a href="http://abyz.me.uk/rpi/pigpio/examples.html#Python%20code">pigpio - Python examples</a> see: ```ir_hasher.py``` - it does not decode bits of the message, but it helped with <a href="http://abyz.me.uk/rpi/pigpio/python.html#callback">callback</a> and <a href="http://abyz.me.uk/rpi/pigpio/python.html#set_watchdog">watchdog</a> reuse.
+
 IR frame format info:  
 <a href="http://winlirc.sourceforge.net/technicaldetails.html">winlirc - technical details</a>   
 <a href="https://techdocs.altium.com/display/FPGA/NEC+Infrared+Transmission+Protocol">NEC Infrared Transmission Protocol</a>  
