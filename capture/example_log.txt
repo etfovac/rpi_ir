@@ -1,0 +1,14 @@
+IR Rx @ 17: Setup Started
+IR Rx @ 17: Setup Done (2020-09-13 23:23:58.912651)
+IR Rx @ 17: Waits for IR signal... (Ctrl+C to exit)
+ir_decoded=00000000111111011011000001001111 len=32
+ir_dec_hex=0xfdb04f
+Valid IR code! Pressed button was: 
+0
+{'0': {'0xfdb04f', '00000000111111011011000001001111'}}
+ir_decoded=00000000111111010000000011111111 len=32
+ir_dec_hex=0xfd00ff
+Valid IR code! Pressed button was: 
+1
+{'0': {'0xfdb04f', '00000000111111011011000001001111'}, '1': {'00000000111111010000000011111111', '0xfd00ff'}}
+Interrupt signal 2 on line 43 in /home/pi/Playground/rpi_ir/rpi_ir/capture/ir-rec_main.py
