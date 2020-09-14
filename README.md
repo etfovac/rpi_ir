@@ -86,18 +86,24 @@ Example output:
 IR Rx @ 17: Setup Started
 IR Rx @ 17: Setup Done (2020-09-13 23:23:58.912651)
 IR Rx @ 17: Waits for IR signal... (Ctrl+C to exit)
-ir_decoded=00000000111111011011000001001111 len=32
-ir_dec_hex=0xfdb04f
-Valid IR code! Pressed button was: 
-0
-{'0': {'0xfdb04f', '00000000111111011011000001001111'}}
-ir_decoded=00000000111111010000000011111111 len=32
-ir_dec_hex=0xfd00ff
-Valid IR code! Pressed button was: 
-1
-{'0': {'0xfdb04f', '00000000111111011011000001001111'}, '1': {'00000000111111010000000011111111', '0xfd00ff'}}
+ir_decoded=00000000111101111100000000111111 len=32
+ir_dec_hex=0xf7c03f
+Valid IR code! Pressed button was of IR remote model f7: 
+on
+{'f7': {'on': {'0xf7c03f', '00000000111101111100000000111111'}}}
+ir_decoded=00000000111101110100000010111111 len=32
+ir_dec_hex=0xf740bf
+Valid IR code! Pressed button was of IR remote model f7: 
+off
+{'f7': {'on': {'0xf7c03f', '00000000111101111100000000111111'}, 'off': {'00000000111101110100000010111111', '0xf740bf'}}}
+ir_decoded=00000000111111011010100001010111 len=32
+ir_dec_hex=0xfda857
+Valid IR code! Pressed button was of IR remote model fd: 
+ok
+{'f7': {'on': {'0xf7c03f', '00000000111101111100000000111111'}, 'off': {'00000000111101110100000010111111', '0xf740bf'}}, 'fd': {'ok': {'0xfda857', '00000000111111011010100001010111'}}}
 Interrupt signal 2 on line 43 in /home/pi/Playground/rpi_ir/capture/ir-rec_main.py
-```
+```  
+Notice 2 different models: ```fd``` and ```f7```.
 
 <b> Note </b>: If you had used LIRC, then you had to uncomment a line in ``` /boot/config.txt```  to reserve Rx/Tx GPIO pin. Even after uninstalling LIRC that line still reserves the pin, so you'll need to comment it out again and reboot. After a reboot that pin is available for registering event detection and callback.  
 Rx pin is 11 (Board), i.e. 17 (BCM).  
