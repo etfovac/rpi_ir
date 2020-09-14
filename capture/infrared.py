@@ -47,6 +47,7 @@ class rx:
         self.d2a = []
         self.threshold01 = sum(ir_format.ir_format['bit1'])*ir_format.tolerance['down']
         self.valid_code = False
+        self.ir_hex = 0
 
     def rx_callback(self, gpio, level, tick):
         if level != pigpio.TIMEOUT:
@@ -81,8 +82,18 @@ class rx:
                     self.rec_started = False
                     self.pi.set_watchdog(self.gpio, 0) # stops watchdog
                 if self.edges > 2*ir_format.ir_format['data_len']: # ignore glitches and repeates
-                    self.valid_code = len(self.ir_decoded)==ir_format.ir_format['data_len']
-                    self.callback(self.ir_decoded, hex(int(self.ir_decoded,2)), self.valid_code) # return the detected IR signal to external callback
+                    self.ir_hex = hex(int(self.ir_decoded,2))
+                    self.valid_code = self.validity_check()
+                    self.callback(self.ir_decoded, self.ir_hex, self.ir_hex[2:4], self.valid_code) # return the detected IR signal to external callback
                 #print(self.edges) #66
                 #print("d1a={}\nlen={}".format(self.d1a,len(self.d1a))) # sometimes signals are inverted in time
                 #print("d2a={}\nlen={}".format(self.d2a,len(self.d2a)))
+    
+    def validity_check(self):
+        cond1 = len(self.ir_decoded)==ir_format.ir_format['data_len']
+        hex_head=self.ir_hex[0:2]
+        #print(hex_head) #0x
+        cond2 = int(hex_head+self.ir_hex[4],16) + int(hex_head+self.ir_hex[6],16) == 15 # int('0xf', 16) = 15
+        cond3 = int(hex_head+self.ir_hex[5],16) + int(hex_head+self.ir_hex[7],16) == 15 # int('0xf', 16) = 15
+        #print("".format(cond2,cond3))
+        return cond1 and cond2 and cond3
