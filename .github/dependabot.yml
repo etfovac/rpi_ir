@@ -9,7 +9,7 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
-      target-branch: "master"
-      # Labels on pull requests for version updates only
-      labels:
-        - "pip dependencies"
+    target-branch: "master"
+    # Labels on pull requests for version updates only
+    labels:
+      - "pip dependencies"
