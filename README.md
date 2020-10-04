@@ -1,5 +1,6 @@
 # RPi &amp; IR  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/etfovac/rpi_ir/blob/master/LICENSE) [![GitHub (pre-)release](https://img.shields.io/badge/releases--yellow.svg)](https://github.com/etfovac/rpi_ir/releases/)
-RPi &amp; IR: Raspberry Pi GPIO &amp; Infrared remote controls (No LIRC)  
+
+RPi &amp; IR: Raspberry Pi GPIO &amp; Infrared remote controls (using ```pigpio``` instead of ```lirc```)  
 
 ### Keywords  
 > Raspberry Pi GPIO  
