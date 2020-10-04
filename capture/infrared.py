@@ -30,7 +30,7 @@ class rx:
     WARNING: tick wraps around from 4294967295 to 0 roughly every 72 minutes
     """
 
-    def __init__(self, pi, gpio, external_callback, timeout=5):
+    def __init__(self, pi, gpio, external_callback, track, log, timeout=5):
         """
         Init an IR remote recorder. A gap of timeout ms indicates the end of the remote key press.
         """
@@ -38,6 +38,8 @@ class rx:
         self.gpio = gpio
         self.watchdog_timeout = timeout
         self.callback = external_callback
+        self.track = track
+        self.log = log
         self.edges = 0
         self.rec_started = False
         pi.set_pull_up_down(gpio, pigpio.PUD_OFF)
@@ -84,7 +86,8 @@ class rx:
                 if self.edges > 2*ir_format.ir_format['data_len']: # ignore glitches and repeates
                     self.ir_hex = hex(int(self.ir_decoded,2))
                     self.valid_code = self.validity_check()
-                    self.callback(self.ir_decoded, self.ir_hex, self.ir_hex[2:4], self.valid_code) # return the detected IR signal to external callback
+                    self.callback(self.ir_decoded, self.ir_hex, self.ir_hex[2:4], self.valid_code, self.track, self.log)
+                    # return the detected IR signal to external callback (track and log are returned unchanged)
                 #print(self.edges) #66
                 #print("d1a={}\nlen={}".format(self.d1a,len(self.d1a))) # sometimes signals are inverted in time
                 #print("d2a={}\nlen={}".format(self.d2a,len(self.d2a)))
