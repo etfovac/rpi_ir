@@ -12,7 +12,7 @@ RPi &amp; IR: Raspberry Pi GPIO &amp; Infrared remote controls (No LIRC)
 - [x] Decode frame (bin, hex)
 - [ ] Data field recovery (redundancy, 8 + 8)
 - [ ] Address field recovery (redundancy, 8 + 8)
-- [ ] Log to config file and map hex codes to buttons
+- [x] Log to config file and map hex codes to buttons
 - [ ] GUI (link code to button and save in config file, confirm/test by button highlighting)
 - [ ] Handle repeat codes, button debouncing, etc.
 - [ ] Re-transmit IR codes
@@ -67,7 +67,7 @@ Typical Header:
 IR format properties are conveniently packed in ```ir_format.py``` which can be updated with more vendor specific details.
 
 ### IR Recorder
-Fully working reliable IR recorder is implemented in file ```ir-rec_main.py```: 
+Fully operational and reliable IR recorder is implemented in file ```ir-rec_main.py```: 
 ```py
 def ir_rx_callback(ir_decoded, ir_hex, valid):
         print("ir_decoded={} len={}".format(ir_decoded, len(ir_decoded)))
@@ -107,6 +107,8 @@ Notice 2 different models: ```fd``` and ```f7```.
 
 <b> Note </b>: If you had used LIRC, then you had to uncomment a line in ``` /boot/config.txt```  to reserve Rx/Tx GPIO pin. Even after uninstalling LIRC that line still reserves the pin, so you'll need to comment it out again and reboot. After a reboot that pin is available for registering event detection and callback.  
 Rx pin is 11 (Board), i.e. 17 (BCM).  
+
+<b> Note </b>: Run ```sudo pigpiod``` after RPi is restarted.
 ``` 
 # Uncomment this to enable infrared communication.
 #dtoverlay=gpio-ir,gpio_pin=17
