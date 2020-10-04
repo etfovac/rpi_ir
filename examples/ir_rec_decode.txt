@@ -1,0 +1,39 @@
+IR Rx @ 17: Setup Started
+IR Rx @ 17: Turn tracking on? [y/n] n
+IR Rx @ 17: Setup Done @ 2020-10-04 17:34:53.158136
+
+IR Rx @ 17: Idle... (Ctrl+C to exit) 
+
+ir_decoded=00000000111111010101000010101111 len=32
+ir_dec_hex=0xfd50af
+Valid IR code (remote model "fd") captured @ 2020-10-04 17:34:54.960906 
+
+Key decoded: 9
+
+IR Rx @ 17: Idle... (Ctrl+C to exit) 
+
+ir_decoded=00000000111111011001000001101111 len=32
+ir_dec_hex=0xfd906f
+Valid IR code (remote model "fd") captured @ 2020-10-04 17:34:56.373708 
+
+Key decoded: 8
+
+IR Rx @ 17: Idle... (Ctrl+C to exit) 
+
+ir_decoded=00000000111111010001000011101111 len=32
+ir_dec_hex=0xfd10ef
+Valid IR code (remote model "fd") captured @ 2020-10-04 17:34:57.269071 
+
+Key decoded: 7
+
+IR Rx @ 17: Idle... (Ctrl+C to exit) 
+
+ir_decoded=00000000111111011010000001011111 len=32
+ir_dec_hex=0xfda05f
+Valid IR code (remote model "fd") captured @ 2020-10-04 17:35:36.086603 
+
+Key decoded: 5
+
+IR Rx @ 17: Idle... (Ctrl+C to exit) 
+
+Interrupt signal 2 on line 82 in /home/pi/Playground/rpi_ir/rpi_ir/capture/ir-rec_main.py

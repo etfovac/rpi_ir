@@ -7,12 +7,13 @@
 # SW: Python 3.7.3
 # HW: Pi Model 3B  V1.2, IR kit: Rx sensor module HX1838, Tx = IR remote(s)
 import sys
+import os
+sys.path.append(os.path.abspath(".."))
+from config.load_ir_file import parse_ir_to_dict, find_key
 import datetime
 import signal
 import pigpio
 import infrared
-import os
-from load_ir_file import parse_ir_to_dict, find_key
 
 IR_PIN = 17 # Board=11, BCM=17
 
@@ -25,12 +26,12 @@ def main():
         pi.stop()
         sys.exit(0)
 
-    def ir_rx_callback(ir_decoded, ir_hex, model, valid, track, log):
+    def ir_rx_callback(ir_decoded, ir_hex, model, valid, track, log, config_folder):
         print("ir_decoded={} len={}".format(ir_decoded, len(ir_decoded)))
         print("ir_dec_hex={}".format(ir_hex))
         if valid:
             print("Valid IR code (remote model \"{}\") captured @ {} \n".format(model,datetime.datetime.now()))
-            filepath = "ir_code_"+str(model)+".txt"
+            filepath = config_folder+"ir_code_"+str(model)+".txt"
             if track:
                 key = input("Enter key ID for this code: [\"skip\" to skip] ")
                 if key != "skip":
@@ -61,6 +62,7 @@ def main():
     
     # Setup tracking and logging
     print("IR Rx @ {}: Setup Started".format(IR_PIN))
+    config_folder="../config/"
     track = (lambda x: x == 'y' or x == 'Y')(input("IR Rx @ {}: Turn tracking on? [y/n] ".format(IR_PIN)))
     #print("IR Rx @ {}: Tracking on: {}".format(IR_PIN, track))
     log = False
@@ -71,7 +73,7 @@ def main():
     
     # Setup IR Receiver Callback
     pi = pigpio.pi()
-    ir_rec = infrared.rx(pi, IR_PIN, ir_rx_callback, track, log) #timeout=5ms, see infrared.py
+    ir_rec = infrared.rx(pi, IR_PIN, ir_rx_callback, track, log, config_folder) #timeout=5ms, see infrared.py
     print("IR Rx @ {}: Setup Done @ {}".format(IR_PIN, datetime.datetime.now()))
     idle()
     

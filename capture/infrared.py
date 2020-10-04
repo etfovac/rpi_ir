@@ -7,7 +7,10 @@
 # SW: Python 3.7.3
 # HW: Pi Model 3B  V1.2, IR kit: Rx sensor module HX1838, Tx = IR remote(s)
 import pigpio
-import ir_format
+import sys
+import os
+sys.path.append(os.path.abspath(".."))
+import config.ir_format as ir_format
 
 class rx:
     """
@@ -30,7 +33,7 @@ class rx:
     WARNING: tick wraps around from 4294967295 to 0 roughly every 72 minutes
     """
 
-    def __init__(self, pi, gpio, external_callback, track, log, timeout=5):
+    def __init__(self, pi, gpio, external_callback, track, log, config_folder="../config", timeout=5):
         """
         Init an IR remote recorder. A gap of timeout ms indicates the end of the remote key press.
         """
@@ -40,6 +43,7 @@ class rx:
         self.callback = external_callback
         self.track = track
         self.log = log
+        self.config_folder = config_folder
         self.edges = 0
         self.rec_started = False
         pi.set_pull_up_down(gpio, pigpio.PUD_OFF)
@@ -86,7 +90,7 @@ class rx:
                 if self.edges > 2*ir_format.ir_format['data_len']: # ignore glitches and repeates
                     self.ir_hex = hex(int(self.ir_decoded,2))
                     self.valid_code = self.validity_check()
-                    self.callback(self.ir_decoded, self.ir_hex, self.ir_hex[2:4], self.valid_code, self.track, self.log)
+                    self.callback(self.ir_decoded, self.ir_hex, self.ir_hex[2:4], self.valid_code, self.track, self.log, self.config_folder)
                     # return the detected IR signal to external callback (track and log are returned unchanged)
                 #print(self.edges) #66
                 #print("d1a={}\nlen={}".format(self.d1a,len(self.d1a))) # sometimes signals are inverted in time
