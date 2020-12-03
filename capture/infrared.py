@@ -97,10 +97,17 @@ class rx:
                 #print("d2a={}\nlen={}".format(self.d2a,len(self.d2a)))
     
     def validity_check(self):
+        """
+        Simple validity check for address and data fields.
+
+        Returns:
+            valid (bool): 3 conditions met: length, address bytes sum ok, data bytes sum ok
+        """
         cond1 = len(self.ir_decoded)==ir_format.ir_format['data_len']
         hex_head=self.ir_hex[0:2]
         #print(hex_head) #0x
         cond2 = int(hex_head+self.ir_hex[4],16) + int(hex_head+self.ir_hex[6],16) == 15 # int('0xf', 16) = 15
         cond3 = int(hex_head+self.ir_hex[5],16) + int(hex_head+self.ir_hex[7],16) == 15 # int('0xf', 16) = 15
         #print("".format(cond2,cond3))
-        return cond1 and cond2 and cond3
+        valid = cond1 and cond2 and cond3
+        return valid
