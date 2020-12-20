@@ -1,4 +1,6 @@
-# RPi &amp; IR  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/etfovac/rpi_ir/blob/master/LICENSE) [![GitHub (pre-)release](https://img.shields.io/badge/releases--yellow.svg)](https://github.com/etfovac/rpi_ir/releases/)
+# RPi &amp; IR  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/etfovac/rpi_ir/blob/master/LICENSE) [![GitHub (pre-)release](https://img.shields.io/badge/releases--yellow.svg)](https://github.com/etfovac/rpi_ir/releases/) [![DOI](https://zenodo.org/badge/291474552.svg)](https://zenodo.org/badge/latestdoi/291474552)
+
+
 
 **RPi &amp; IR** is a project which uses Raspberry Pi GPIO, IR kit and and Python (using ```pigpio``` instead of ```lirc```) to:  
 - monitor, capture and decode Infra-Red signals sent by an IR remote (controller)  
